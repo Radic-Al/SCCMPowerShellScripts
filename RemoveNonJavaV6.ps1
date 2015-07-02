@@ -1,0 +1,1 @@
+for each ( $app in Get-WmiObject Win32_product | Where-Object {$_.Name -like "*Java*" -and $_.Version -notlike "6.*"} Select IdentifyingNumber ) { Start-Process -FilePath "msiexec" -Arg "/Uninstall $($app.IdentifyingNumber) /qr /norestart" -Wait -Passthru; }
