@@ -44,6 +44,8 @@ Try
         foreach ($service in $services)
         {
             $service | Select Name, StartName, State;
+            $serviceName = $service.Name;
+            write-host "Stopping $serviceName";
             if ($service.Change($Null, $Null, $Null, $Null, $Null, $Null, $Null, $Password).ReturnValue -eq 0)
             {
                 write-host "Service account password updated" -foregroundcolor "Green";
@@ -55,7 +57,7 @@ Try
             {
                 write-host "Service stopped" -ForegroundColor "Green";
             } else {
-                write-host "Service failed to stop" -ForegroundColor "Red";
+                write-host "Service failed to stop" -ForegroundColor "Yellow";
             }
 
             if ($Service.StartService().ReturnValue -eq 0)
@@ -64,7 +66,7 @@ Try
             } else {
                 write-host "Service did not restart" -ForegroundColor "Green";
             }
-            Get-WmiObject -Class Win32_Service -ComputerName $hostname -Filter "Name = $service.Name" | Select Name, StartName, State;
+            Get-WmiObject -Class Win32_Service -ComputerName $hostname -Filter "Name = '$serviceName'" | Select Name, StartName, State;
         }
     }
 }
