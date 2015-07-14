@@ -30,7 +30,6 @@
   <ItemGroup>
     <Compile Include="RemoveNonJavaV6.ps1" />
     <Compile Include="ResetServiceAccountPasswordAndServiceAccounts.ps1" />
-    <Compile Include="Script.ps1" />
     <Compile Include="SearchServersForServiceAccount.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
